@@ -7,12 +7,59 @@ function App() {
 
   const [roomsInfo, setRoomsInfo] = useState(roomsData);
 
+  const [origin, setOrigin] = useState([]);
+
   let [showModal, setShowModal] = useState(false);
+
+  let [isFirst, setIsFirst] = useState(true);
 
   const [bad, setBad] = useState([0, 0, 0]);
 
   const [currentIndex, setCurrentIndex] = useState(-1);
 
+  function originalData(){
+    if(isFirst){
+      setOrigin([... roomsInfo]);
+      setIsFirst(false);
+    } else {
+      setRoomsInfo([... origin]);
+    }
+  }
+  function priceAscSort(){
+    setOrigin([... roomsInfo]);
+    roomsInfo.sort((a,b)=>{
+      if(a.price < b.price) return -1;
+      if(a.price > b.price) return 1;
+      else return 0;
+    })
+  }
+
+  function priceDescSort(){
+    setOrigin([... roomsInfo]);
+    roomsInfo.sort((a,b)=>{
+      if(a.price < b.price) return 1;
+      if(a.price > b.price) return -1;
+      else return 0;
+    })
+  }
+
+  function titleAscSort(){
+    setOrigin([... roomsInfo]);
+    roomsInfo.sort((a,b)=>{
+      if(a.title < b.title) return -1;
+      if(a.title > b.title) return 1;
+      else return 0;
+    })
+  }
+
+  function titleDescSort(){
+    setOrigin([... roomsInfo]);
+    roomsInfo.sort((a,b)=>{
+      if(a.title < b.title) return 1;
+      if(a.title > b.title) return -1;
+      else return 0;
+    })
+  }
   return (
     <div className="App">
       <div className="menu">
@@ -21,7 +68,22 @@ function App() {
         })}
       </div>
       <div className="sortMenu">
-        처음처럼  가격 ▲ ▼  물건명 ▲ ▼ 
+        <span onClick={()=>{          
+          originalData()
+        }}>처음처럼</span>  가격 
+        <span onClick={()=>{
+          priceAscSort()
+        }}>▲</span> 
+        <span onClick={()=>{
+          priceDescSort()
+        }}>▼</span>  
+        물건명 
+        <span onClick={()=>{
+          titleAscSort()
+        }}>▲</span> 
+        <span onClick={()=>{
+          titleDescSort()
+        }}>▼</span>   
       </div>
       <div>
         {showModal === true ? (
