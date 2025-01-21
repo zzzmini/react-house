@@ -20,12 +20,18 @@ function App() {
           return <a href="#">{x}</a>;
         })}
       </div>
-
-        <div>{showModal === true ? 
-          <Modal 
+      <div className="sortMenu">
+        처음처럼  가격 ▲ ▼  물건명 ▲ ▼ 
+      </div>
+      <div>
+        {showModal === true ? (
+          <Modal
             currentIndex={currentIndex}
             roomsInfo={roomsInfo}
-            setShowModal={setShowModal}/> : null}</div>
+            setShowModal={setShowModal}
+          />
+        ) : null}
+      </div>
       <div className="content">
         {roomsInfo.map((x, index) => {
           return (
@@ -48,20 +54,23 @@ function App() {
 }
 
 function Modal(props) {
-  let room = props.roomsInfo[props.currentIndex];;
+  let room = props.roomsInfo[props.currentIndex];
   return (
     <div className="black-bg">
       <div className="white-bg">
         <h4>{room.title}</h4>
         <p>{room.content}</p>
         <p>가격 : {room.price}</p>
-        <button onClick={()=>{
-          props.setShowModal(false);
-        }}>닫기</button>
+        <button
+          onClick={() => {
+            props.setShowModal(false);
+          }}
+        >
+          닫기
+        </button>
         <div className="modal-img">
-          <img src={room.image} width='400px'></img>
+          <img src={room.image} width="400px"></img>
         </div>
-        
       </div>
     </div>
   );
@@ -71,7 +80,7 @@ const Room = (props) => {
   let rooms = props.roomsInfo;
 
   let i = props.index;
-  let strPrice = rooms[i].price.toLocaleString('ko-KR');
+  let strPrice = rooms[i].price.toLocaleString("ko-KR");
   return (
     <div>
       <h4
