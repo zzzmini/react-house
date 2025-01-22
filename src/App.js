@@ -6,6 +6,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import MainPage from "./pages/MainPage"
+import SignUp from "./pages/Signup";
+import Main from "./pages/Main";
 
 function App(){
   const [menu, setMenu] = useState(["Home", "Shop", "About"]);
@@ -38,7 +40,7 @@ function App(){
       </Navbar>
       {/* 라우터 처리 */}
       <Routes>
-        <Route path="/main" element={<div>Main</div>} />
+        <Route path="/main" element={<Main/>} />
         <Route index element={
           <div>
             <MainPage
@@ -46,6 +48,7 @@ function App(){
               setRoomsInfo = {setRoomsInfo}
                />
           </div>} />
+        <Route path="/signup" element={<SignUp/>} />
         <Route path="*" element={
           <div>
             <h4>
